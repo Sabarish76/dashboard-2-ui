@@ -100,7 +100,7 @@ const barData = {
   labels: barLabels,
   datasets: [
     {
-      label: "Dataset 1",
+      label: "Dataset 3",
       data: [70, 50, 70, 50, 70, 50],
       backgroundColor: [
         "rgba(255, 99, 132, 0.5)",
