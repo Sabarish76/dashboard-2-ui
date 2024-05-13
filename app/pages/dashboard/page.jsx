@@ -1,3 +1,4 @@
+"use client";
 import React from "react";
 import Profile from "../../images/profile.png";
 import { FaSearch } from "react-icons/fa";
@@ -14,9 +15,137 @@ import Brain from "../../images/brain.png";
 import Graph from "../../images/graph.png";
 import Graph2 from "../../images/graph4.png";
 import Teeth from "../../images/teeth.png";
-import Bar from "../../images/bar.png";
+// import Bar from "../../images/bar.png";
 import Eye from "../../images/eye.png";
+import {
+  Chart as ChartJS,
+  CategoryScale,
+  LinearScale,
+  PointElement,
+  LineElement,
+  BarElement,
+  Title,
+  Tooltip,
+  Legend,
+} from "chart.js";
+
+import { Line } from "react-chartjs-2";
 import Image from "next/image";
+import { scales } from "chart.js";
+import { Bar } from "react-chartjs-2";
+
+ChartJS.register(
+  CategoryScale,
+  LinearScale,
+  BarElement,
+  Title,
+  Tooltip,
+  Legend
+);
+
+ChartJS.register(
+  CategoryScale,
+  LinearScale,
+  PointElement,
+  LineElement,
+  Title,
+  Tooltip,
+  Legend
+);
+
+export const options = {
+  responsive: true,
+  plugins: {
+    legend: {
+      position: "top",
+    },
+    title: {
+      display: true,
+      text: "Pulse Rate",
+    },
+  },
+};
+
+export const options2 = {
+  responsive: true,
+  plugins: {
+    legend: {
+      position: "top",
+    },
+    title: {
+      display: true,
+      text: "Haemoglobin",
+    },
+  },
+};
+
+export const barOptions = {
+  responsive: true,
+  plugins: {
+    legend: {
+      position: "top",
+    },
+    title: {
+      display: true,
+      text: "Sugar Level",
+    },
+  },
+};
+
+const labels = ["Sun", "Mon", "Tue", "Wed", "Thu", "Fri", "Sat"];
+const labels2 = ["Mon", "Tue", "Wed", "Thu", "Fri", "Sat"];
+const barLabels = ["Mon", "Tue", "Wed", "Thu", "Fri", "Sat"];
+
+const barData = {
+  labels: barLabels,
+  datasets: [
+    {
+      label: "Dataset 1",
+      data: [70, 50, 70, 50, 70, 50],
+      backgroundColor: [
+        "rgba(255, 99, 132, 0.5)",
+        "rgba(54, 162, 235, 0.5)",
+        "rgba(255, 206, 86, 0.5)",
+        "rgba(75, 192, 192, 0.5)",
+        "rgba(153, 102, 255, 0.5)",
+        "rgba(255, 159, 64, 0.5)",
+      ],
+      borderColor: [
+        "rgb(255, 99, 132)",
+        "rgb(54, 162, 235)",
+        "rgb(255, 206, 86)",
+        "rgb(75, 192, 192)",
+        "rgb(153, 102, 255)",
+        "rgb(255, 159, 64)",
+      ],
+      borderWidth: 1,
+    },
+  ],
+};
+
+export const data = {
+  labels,
+  datasets: [
+    {
+      label: "Dataset 1",
+      data: [65, 59, 80, 81, 56, 55, 40],
+      borderColor: "rgb(255, 99, 132)",
+      backgroundColor: "rgba(255, 99, 132, 0.5)",
+    },
+  ],
+};
+
+export const data2 = {
+  labels: labels2,
+  datasets: [
+    {
+      label: "Dataset 2",
+      data: [10, 20, 30, 20, 30, 10],
+      borderColor: "rgb(75, 192, 192)",
+      backgroundColor: "rgba(75, 192, 192, 0.5)",
+    },
+  ],
+};
 
 const Dashboard = () => {
   return (
@@ -149,7 +278,10 @@ const Dashboard = () => {
                 <h1>72 bpm Average</h1>
               </div>
             </div>
-            <div className="flex">
+            <div>
+              <Line options={options} data={data} />
+            </div>
+            {/* <div className="flex">
               <div className="py-3 leading-7 text-slate-400">
                 <p>90</p>
                 <p>80</p>
@@ -172,7 +304,7 @@ const Dashboard = () => {
               <p>Thu</p>
               <p>Fri</p>
               <p>Sat</p>
-            </div>
+            </div> */}
           </div>
           <div className="grid grid-cols-2 py-3 w-[100%] gap-12">
             <div className="bg-white p-3 shadow-xl rounded-lg ">
@@ -185,9 +317,10 @@ const Dashboard = () => {
                 <p className="text-sm text-slate-400">g/dl</p>
               </div>
               <div>
-                <div>
+                <Line options={options2} data={data2} className="mt-10" />
+                {/* <div>
                   <Image src={Graph2} alt="graph " />
-                </div>
+                </div> */}
               </div>
             </div>
             <div className="bg-white p-3 shadow-xl rounded-lg ">
@@ -200,9 +333,10 @@ const Dashboard = () => {
                 <p className="text-sm text-slate-400">mg/dl</p>
               </div>
               <div>
-                <div>
+                <Bar options={barOptions} data={barData} className="mt-10" />
+                {/* <div>
                   <Image src={Bar} alt="graph " />
-                </div>
+                </div> */}
               </div>
             </div>
           </div>

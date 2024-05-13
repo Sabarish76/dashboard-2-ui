@@ -1,5 +1,5 @@
 import Layout from "./pages/sidebar/page";
-import Dashboard from "./pages/dashboard/page";
+import Dashboard from "./pages/dashboard/page.jsx";
 
 export default function Home() {
   return (
